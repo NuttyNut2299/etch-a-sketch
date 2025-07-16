@@ -2,6 +2,10 @@ body {
     background-color: #DEDFE4;
 }
 
+input {
+    margin: 0;
+}
+
 #header {
     font-size: 48px;
     font-family: 'Segoe Script', sans-serif;
@@ -16,8 +20,8 @@ body {
 }
 
 #drawing-board {
-    width: 640px;
-    height: 640px;
+    width: 960px;
+    height: 800px;
     background-color: #CC0000;
     border-color: #800000;
     border-style: solid;
@@ -26,6 +30,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 48px;
 }
 
 #canvas {
@@ -38,4 +44,22 @@ body {
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
+}
+
+#option-container {
+    width: 800px;
+    height: 120px;
+    background-color: white;
+    border-color: #800000;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#grid-value-display {
+    font-size: 24px;
+    font-family:'Segoe UI', sans-serif;
 }
