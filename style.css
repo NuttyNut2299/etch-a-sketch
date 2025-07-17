@@ -1,8 +1,14 @@
+html, 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: #DEDFE4;
     display: flex; 
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     min-height: 100vh;
 }
@@ -22,7 +28,6 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-grow: 1;
 }
 
 #drawing-board {
@@ -137,4 +142,21 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+}
+
+#github-icon {
+    width: 26px; 
+    height: 26px;
+    padding: 0 0 0 4px;
+    min-width: 0;
+    min-height: 0;
+    position: absolute;
+}
+
+#footer {
+    margin-top: auto;
+    padding: 8px 0;
+    font-family:'Segoe UI', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
 }
