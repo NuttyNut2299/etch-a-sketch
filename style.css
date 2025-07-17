@@ -65,18 +65,24 @@ input {
     border-style: solid;
     border-width: 4px;
     border-radius: 24px;
-    padding: 0 32px;
+    padding: 0 60px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 32px;
+    gap: 36px;
 }
 
 #grid-value-display,
 #random-color-text,
 #darkening-effect-text,
 #btn-apply {
-    font-size: 24px;
+    font-size: 20px;
+    font-family:'Segoe UI', sans-serif;
+}
+
+#grid-value-current,
+#random-color-status,
+#darkening-effect-status {
     font-family:'Segoe UI', sans-serif;
 }
 
@@ -157,6 +163,6 @@ input:checked + .slider:before {
     margin-top: auto;
     padding: 8px 0;
     font-family:'Segoe UI', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
 }

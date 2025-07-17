@@ -12,7 +12,7 @@ function setGridAmount (sliderValue, randomColor, darkeningEffect) {
     for (let i = 0; i < sliderValue; i++) {
         const row = document.createElement("div");
 
-        row.setAttribute("style", "margin: 0; padding: 0; display: flex; flex: 1 1 0; min-width: 0; min-height: 0; background-color: white;");
+        row.setAttribute("style", "margin: 0; padding: 0; display: flex; flex: 1 1 0; min-width: 0; min-height: 0;");
 
         for (let j = 0; j < sliderValue; j++) {
             const grid = document.createElement("div");
@@ -87,22 +87,22 @@ function generateRandomRGBACode(darkening) {
 }
 
 var slider = document.querySelector("#grid-range");
-var gridValue = document.querySelector("#grid-value-display");
+var gridValue = document.querySelector("#grid-value-current");
 
 var randomColor = document.querySelector("#random-color");
 var darkeningEffect = document.querySelector("#darkening-effect");
 
-gridValue.textContent = "Grid: " + slider.value + " x " + slider.value;
+gridValue.textContent = "Change Grid: " + slider.value + " x " + slider.value;
 
 // display current grid slider value dynamically
 slider.oninput = function() {
-    gridValue.textContent = "Grid: " + slider.value + " x " + slider.value;
+    gridValue.textContent = "Change Grid: " + slider.value + " x " + slider.value;
 }
 
 const btnApply = document.querySelector("#btn-apply");
 
 // set default amount 16 x 16 grid after loading dom
-document.addEventListener("DOMContentLoaded", (e) => {
+document.addEventListener("DOMContentLoaded", () => {
     setGridAmount(slider.value, randomColor.checked, darkeningEffect.checked);
 });
 
@@ -112,4 +112,26 @@ btnApply.addEventListener("click", () => {
         canvas.firstChild.remove(); // remove all grids before resetting the grid
     }
     setGridAmount(slider.value, randomColor.checked, darkeningEffect.checked);
+
+    const randomColorStatus = document.querySelector("#random-color-status");
+    const darkeningEffectStatus = document.querySelector("#darkening-effect-status");
+    const gridValueCurrent = document.querySelector("#grid-value-display");
+
+    if (randomColor.checked) {
+        randomColorStatus.textContent = "Current Status: On";
+        randomColorStatus.style.fontWeight = "bold";
+    } else {
+        randomColorStatus.textContent = "Current Status: Off";
+        randomColorStatus.style.fontWeight = "400";
+    }
+
+    if (darkeningEffect.checked) {
+        darkeningEffectStatus.textContent = "Current Status: On";
+        darkeningEffectStatus.style.fontWeight = "bold";
+    } else {
+        darkeningEffectStatus.textContent = "Current Status: Off";
+        darkeningEffectStatus.style.fontWeight = "400";
+    }
+
+    gridValueCurrent.textContent = "Current Grid: " + slider.value + " x " + slider.value;
 });

@@ -23,6 +23,9 @@
                         <input autocomplete="off" type="checkbox" id="random-color">
                         <span class="slider"></span>
                     </label>
+                    <div id="random-color-status">
+                        Current Status: Off
+                    </div>
                 </div>
                 <div id="darkening-effect-container">
                     <div id="darkening-effect-text">
@@ -32,12 +35,18 @@
                         <input autocomplete="off" type="checkbox" id="darkening-effect">
                         <span class="slider"></span>
                     </label>
+                    <div id="darkening-effect-status">
+                        Current Status: Off
+                    </div>
                 </div>
                 <div id="grid-slide-container">
                     <div id="grid-value-display">
-                        Grid: 16 x 16
+                        Current Grid: 16 x 16
                     </div>
                     <input autocomplete="off" type="range" min="1" max="100" value="16" id="grid-range">
+                    <div id="grid-value-current">
+                        Change Grid: 16 x 16
+                    </div>
                 </div>
                 <button id="btn-apply">Reset and Apply Settings</button>
             </div>
