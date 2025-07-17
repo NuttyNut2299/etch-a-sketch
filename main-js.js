@@ -8,35 +8,82 @@ const canvasHeight = canvas.offsetHeight;
 function setGridAmount (sliderValue, randomColor, darkeningEffect) {
     const defaultGridWidth = canvasWidth / sliderValue - 2; // subtract 2 to account for 1px border on each grid
     const defaultGridHeight = canvasHeight / sliderValue - 2;
+
     for (let i = 0; i < sliderValue; i++) {
         const row = document.createElement("div");
-        row.setAttribute("style", "margin: 0; padding: 0; display: flex; flex: 1 1 0; min-width: 0; min-height: 0");
+
+        row.setAttribute("style", "margin: 0; padding: 0; display: flex; flex: 1 1 0; min-width: 0; min-height: 0; background-color: white;");
+
         for (let j = 0; j < sliderValue; j++) {
             const grid = document.createElement("div");
+
             grid.setAttribute("style", "width: " + defaultGridWidth + "px; height: " + defaultGridHeight + 
-                "px; min-width: 0; min-height: 0; flex: 1 1 0; border: solid 1px #e6e6e6; margin: 0; padding: 0;");
-            grid.addEventListener("mouseover", (e) => {
-                if (randomColor) {
-                    e.target.style.backgroundColor = generateRandomHexCode ();
+                "px; min-width: 0; min-height: 0; flex: 1 1 0; border: solid 1px #e6e6e6; background-color: white; margin: 0; padding: 0;");
+
+            grid.addEventListener("mouseover", () => {
+                if (randomColor) {                   
+                    if (grid.style.backgroundColor === "white") { // don't generate color again when there's color
+                        grid.style.backgroundColor = generateRandomRGBACode(darkeningEffect);
+                    }
+                } else if (!randomColor && darkeningEffect){
+                    if (grid.style.backgroundColor === "white") { // don't regenerate 0 opacity when called
+                        grid.style.backgroundColor = "rgba(0,0,0,0)";
+                    }
+                } else {
+                    grid.style.backgroundColor = "#696969";
                 }
-                else {
-                    e.target.style.backgroundColor = "#696969";
+
+                if (darkeningEffect) {
+                    // get the individual value of rgba code
+                    const rgbaString = grid.style.backgroundColor;
+                    const numbers = rgbaString.substring(
+                        rgbaString.indexOf('(') + 1,
+                        rgbaString.lastIndexOf(')')
+                    );
+
+                    const code = numbers.split(',');
+
+                    const red = parseInt(code[0]);
+                    const green = parseInt(code[1]);
+                    const blue = parseInt(code[2]);
+                    var opacity = parseFloat(code[3]);
+
+                    // increase opacity by 10%
+                    if (opacity !== 1) {
+                        opacity+=0.1;
+                        grid.style.backgroundColor = "rgba(" + red + "," + green + "," + blue + "," + opacity + ")";
+                    }
                 }
             });
+
             row.appendChild(grid);
         }
         canvas.appendChild(row);
     }
 }
 
-function generateRandomHexCode () {
-    let hexCode = "#" // initialise with number sign for color hex code
+// defunct, use random rgba value instead
+// function generateRandomHexCode () {
+//     let hexCode = "#" // start the string with number sign for color hex code
 
-    while ( hexCode.length < 7 ) { // generate 6 digits
-      hexCode += (Math.round(Math.random() * 15)).toString(16) // pick a random number from 0 to 15, then convert them to base 16 with toString function
+//     while ( hexCode.length < 7 ) { // generate 6 digits
+//       hexCode += (Math.round(Math.random() * 15)).toString(16) // pick a random number from 0 to 15, then convert them to base 16 with toString function
+//     }
+
+//     return hexCode 
+// }
+
+function generateRandomRGBACode(darkening) {
+    // generate random rgba value
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
+    
+    if (!darkening) {
+        return "rgba(" + red + "," + green + "," + blue + ",1)"
+    } else {
+        return "rgba(" + red + "," + green + "," + blue + ",0)"
     }
-
-    return hexCode 
 }
 
 var slider = document.querySelector("#grid-range");

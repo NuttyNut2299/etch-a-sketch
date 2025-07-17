@@ -1,5 +1,10 @@
 body {
     background-color: #DEDFE4;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 input {
@@ -17,11 +22,12 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-grow: 1;
 }
 
 #drawing-board {
     width: 960px;
-    height: 800px;
+    height: 780px;
     background-color: #CC0000;
     border-color: #800000;
     border-style: solid;
