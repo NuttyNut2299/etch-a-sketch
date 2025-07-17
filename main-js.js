@@ -5,7 +5,7 @@ const canvasWidth = canvas.offsetWidth;
 const canvasHeight = canvas.offsetHeight;
 
 // set amount of grid based on slider value
-function setGridAmount (sliderValue) {
+function setGridAmount (sliderValue, randomColor, darkeningEffect) {
     const defaultGridWidth = canvasWidth / sliderValue - 2; // subtract 2 to account for 1px border on each grid
     const defaultGridHeight = canvasHeight / sliderValue - 2;
     for (let i = 0; i < sliderValue; i++) {
@@ -16,7 +16,12 @@ function setGridAmount (sliderValue) {
             grid.setAttribute("style", "width: " + defaultGridWidth + "px; height: " + defaultGridHeight + 
                 "px; min-width: 0; min-height: 0; flex: 1 1 0; border: solid 1px #e6e6e6; margin: 0; padding: 0;");
             grid.addEventListener("mouseover", (e) => {
-                e.target.style.backgroundColor = "#696969";
+                if (randomColor) {
+                    e.target.style.backgroundColor = generateRandomHexCode ();
+                }
+                else {
+                    e.target.style.backgroundColor = "#696969";
+                }
             });
             row.appendChild(grid);
         }
@@ -24,8 +29,22 @@ function setGridAmount (sliderValue) {
     }
 }
 
+function generateRandomHexCode () {
+    let hexCode = "#" // initialise with number sign for color hex code
+
+    while ( hexCode.length < 7 ) { // generate 6 digits
+      hexCode += (Math.round(Math.random() * 15)).toString(16) // pick a random number from 0 to 15, then convert them to base 16 with toString function
+    }
+
+    return hexCode 
+}
+
 var slider = document.querySelector("#grid-range");
 var gridValue = document.querySelector("#grid-value-display");
+
+var randomColor = document.querySelector("#random-color");
+var darkeningEffect = document.querySelector("#darkening-effect");
+
 gridValue.textContent = "Grid: " + slider.value + " x " + slider.value;
 
 // display current grid slider value dynamically
@@ -36,11 +55,14 @@ slider.oninput = function() {
 const btnApply = document.querySelector("#btn-apply");
 
 // set default amount 16 x 16 grid after loading dom
-setGridAmount(slider.value);
+document.addEventListener("DOMContentLoaded", (e) => {
+    setGridAmount(slider.value, randomColor.checked, darkeningEffect.checked);
+});
+
 
 btnApply.addEventListener("click", () => {
     while (canvas.firstChild) {
         canvas.firstChild.remove(); // remove all grids before resetting the grid
     }
-    setGridAmount(slider.value);
+    setGridAmount(slider.value, randomColor.checked, darkeningEffect.checked);
 });

@@ -15,13 +15,31 @@
         <div id="drawing-board">
             <div id="canvas"></div>
             <div id="option-container">
+                <div id="random-color-container">
+                    <div id="random-color-text">
+                        Random Color
+                    </div>
+                    <label class="switch">
+                        <input autocomplete="off" type="checkbox" id="random-color">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div id="darkening-effect-container">
+                    <div id="darkening-effect-text">
+                        Darkening Effect
+                    </div>
+                    <label class="switch">
+                        <input autocomplete="off" type="checkbox" id="darkening-effect">
+                        <span class="slider"></span>
+                    </label>
+                </div>
                 <div id="grid-slide-container">
                     <div id="grid-value-display">
                         Grid: 16 x 16
                     </div>
                     <input autocomplete="off" type="range" min="1" max="100" value="16" id="grid-range">
-                    <button id="btn-apply">Set the grid!</button>
                 </div>
+                <button id="btn-apply">Reset and Apply Settings</button>
             </div>
         </div>
     </div>
